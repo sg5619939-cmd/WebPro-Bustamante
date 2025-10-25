@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebPro Bustamante</title>
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-card: #ffffff;
+      --color-header-nav: #00bcd4;
+      --color-accent: #00bcd4;
+      --color-accent-hover: #0097a7;
+      --color-text: #333333;
+      --color-nav-bg: #ffffff;
+      --color-nav-text: #00bcd4;
+      --color-whatsapp: #25D366;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    header {
+      background-color: var(--color-header-nav);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    nav {
+      background-color: var(--color-nav-bg);
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      color: var(--color-nav-text);
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: var(--color-accent-hover);
+      text-decoration: underline;
+    }
+
+    .container {
+      padding: 40px 20px;
+    }
+
+    .card {
+      background-color: var(--color-card);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--color-nav-bg);
+      color: var(--color-accent);
+      font-size: 14px;
+      border-top: 1px solid #eee;
+    }
+
+    button {
+      background-color: var(--color-whatsapp);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      background-color: #1ebe5d;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
+    }
+
+    .section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Login/Register Panel */
+    #authContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .auth-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .auth-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .auth-box p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .auth-box a {
+      color: var(--color-accent);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    #mainContent {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WebPro Bustamante</h1>
+    <p>Innovación y tecnología para transformar tu empresa.</p>
+  </header>
+
+  <!-- Login/Register Modal -->
+  <div id="authContainer">
+    <div class="auth-box" id="loginBox">
+      <h2>Iniciar Sesión</h2>
+      <input type="text" id="loginUser" placeholder="Usuario" required>
+      <input type="password" id="loginPass" placeholder="Contraseña" required>
+      <button onclick="login()">Ingresar</button>
+      <p id="loginError" style="color:red;"></p>
+      <p>¿No tenés cuenta? <a onclick="toggleForm()">Registrate</a></p>
+    </div>
+
+    <div class="auth-box" id="registerBox" style="display:none;">
+      <h2>Crear Cuenta</h2>
+      <input type="text" id="registerUser" placeholder="Nuevo usuario" required>
+      <input type="password" id="registerPass" placeholder="Contraseña" required>
+      <button onclick="register()">Registrar</button>
+      <p id="registerError" style="color:red;"></p>
+      <p>¿Ya tenés cuenta? <a onclick="toggleForm()">Iniciar Sesión</a></p>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PROTEGIDO -->
+  <div id="mainContent">
+    <nav>
+      <a onclick="mostrar('inicio')">Inicio</a>
+      <a onclick="mostrar('Producto')">Producto</a>
+      <a onclick="mostrar('sobre-nosotros')">Sobre Nosotros</a>
+      <a onclick="mostrar('contacto')">Contacto</a>
+      <a onclick="mostrar('servicios')">servicios</a>
+    </nav>
+   
+   
+
+
+    <div class="container">
+      <section id="inicio" class="section active">
+        <div class="card">
+          <h2>Inicio</h2>
+          <p>Bienvenido a WebPro Bustamante. Volvé al inicio para descubrir todo lo que ofrecemos.</p>
+        </div>
+      </section>
+
+      <section id="servicios" class="section">
+        <div class="card">
+          <h2>Servicios</h2>
+          <ul>
+            <li>Páginas web desde cero para empresas y emprendimientos</li>
+            <li>Digitalización de procesos empresariales</li>
+            <li>Automatización de tareas y reportes</li>
+            <li>Sistemas de registro de asistencia y adelantos</li>
+            <li>Facturación electrónica y paneles digitales</li>
+            <li>Asesoría digital para nuevos emprendedores</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sobre-nosotros" class="section">
+        <div class="card">
+          <h2>Sobre Nosotros</h2>
+          <p>Somos una empresa nueva, fundada por un adolescente emprendedor con pasión por la tecnología.</p>
+        </div>
+      </section>
+      
+      <section id="Producto" class="section">
+        <div class="card">
+          <h2>Producto</h2>
+          <li>Sistema Operativo</li>
+          <li>Pagina web</li>
+          <li>Procesador</li>
+      </section>
+     
+        <section id="contacto" class="section">
+        <div class="card">
+          <h2>Contacto</h2>
+          <p><strong>Teléfono:</strong> <a href="tel:+595974986944">0974 986 944</a></p>
+          <p><strong>Email:</strong> <a href="mailto:sg5619939@gmail.com">sg5619939@gmail.com</a></p>
+          <a href="https://wa.me/595974986944?text=Hola%2C%20quiero%20hacer%20una%20consulta." target="_blank">
+            <button>Escribinos por WhatsApp</button>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      © 2025 WebPro Bustamante - Todos los derechos reservados
+    </footer>
+  </div>
+
+  <script>
+    function mostrar(seccionId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(seccionId).classList.add('active');
+    }
+     
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('authContainer').style.display = 'flex';
+      document.getElementById('loginUser').value = '';
+      document.getElementById('loginPass').value = '';
+    }
+    
+    function toggleForm() {
+      const loginBox = document.getElementById('loginBox');
+      const registerBox = document.getElementById('registerBox');
+      loginBox.style.display = loginBox.style.display === 'none' ? 'block' : 'none';
+      registerBox.style.display = registerBox.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function register() {
+      const user = document.getElementById('registerUser').value;
+      const pass = document.getElementById('registerPass').value;
+      if (!user || !pass) return;
+
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      if (users[user]) {
+        document.getElementById('registerError').textContent = 'Ese usuario ya existe.';
+      } else {
+        users[user] = pass;
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Usuario registrado. Ahora podés iniciar sesión.');
+        toggleForm();
+      }
+    }
+
+    
+    
+  </script>
+
